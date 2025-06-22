@@ -2,7 +2,6 @@
   "name": "my-portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://adrian-dean.github.io/my-portfolio",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,7 +11,9 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.5.2",
