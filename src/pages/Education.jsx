@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PaginatedEducation from '../components/PaginatedEducation';
 
 const educationData = [
   // Education
@@ -76,6 +77,7 @@ const Education = () => {
   const [activeCategories, setActiveCategories] = useState([]);
   const [activeSubcategories, setActiveSubcategories] = useState([]);
   const [hoveredDropdown, setHoveredDropdown] = useState(null);
+  const [sortMode, setSortMode] = useState('timeline');
 
   const toggleCategory = (category) => {
     setActiveCategories(prev =>
@@ -89,10 +91,23 @@ const Education = () => {
     );
   };
 
-  const filteredData = educationData
-    .filter(item => activeCategories.includes(item.category))
-    .filter(item => activeSubcategories.length === 0 || activeSubcategories.includes(item.subcategory))
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  const parseDate = (dateStr) => {
+    const [month, year] = dateStr.includes('/') ? dateStr.split('/') : ["01", dateStr];
+    return new Date(`${year}-${month}-01`);
+  };
+
+  const sortData = (data) => {
+    if (sortMode === 'alphabetical') {
+      return [...data].sort((a, b) => a.title.localeCompare(b.title));
+    }
+    return [...data].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+  };
+
+  const filteredData = sortData(
+    educationData
+      .filter(item => activeCategories.includes(item.category))
+      .filter(item => activeSubcategories.length === 0 || activeSubcategories.includes(item.subcategory))
+  );
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
@@ -108,8 +123,8 @@ const Education = () => {
           >
             <button
               onClick={() => toggleCategory(id)}
-              className={`px-4 py-2 rounded-full border transition ${
-                activeCategories.includes(id) ? 'bg-teal-500 border-teal-400' : 'bg-gray-800 border-gray-600 hover:bg-gray-700'
+              className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out transform ${
+                activeCategories.includes(id) ? 'bg-teal-500 border-teal-400 scale-105' : 'bg-gray-800 border-gray-600 hover:bg-gray-700'
               }`}
             >
               {label} ▼
@@ -135,18 +150,27 @@ const Education = () => {
         ))}
       </div>
 
-      <div className="relative border-l border-gray-700 pl-6">
-        {filteredData.map(item => (
-          <div key={item.id} className="mb-10 relative">
-            <div className="absolute w-3 h-3 bg-teal-500 rounded-full left-[-7px] top-1.5"></div>
-            <div className="bg-gray-800 p-4 rounded-md shadow-md">
-              <h2 className="text-xl font-semibold text-teal-400">{item.title}</h2>
-              <h3 className="text-sm text-gray-400">{item.institution} • {item.date}</h3>
-              <p className="mt-2 text-gray-300">{item.description}</p>
-            </div>
-          </div>
-        ))}
+      <div className="flex justify-center gap-4 mb-8">
+        <button
+          onClick={() => setSortMode('timeline')}
+          className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out ${
+            sortMode === 'timeline' ? 'bg-teal-500 border-teal-400 scale-105' : 'bg-gray-800 border-gray-600 hover:bg-gray-700'
+          }`}
+        >
+          Timeline
+        </button>
+        <button
+          onClick={() => setSortMode('alphabetical')}
+          className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out ${
+            sortMode === 'alphabetical' ? 'bg-teal-500 border-teal-400 scale-105' : 'bg-gray-800 border-gray-600 hover:bg-gray-700'
+          }`}
+        >
+          Alphabetical Order
+        </button>
       </div>
+
+      <PaginatedEducation data={filteredData} />
+      
     </div>
   );
 };
