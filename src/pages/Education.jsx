@@ -78,6 +78,7 @@ const Education = () => {
   const [activeSubcategories, setActiveSubcategories] = useState([]);
   const [hoveredDropdown, setHoveredDropdown] = useState(null);
   const [sortMode, setSortMode] = useState('timeline');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const toggleCategory = (category) => {
     setActiveCategories(prev =>
@@ -103,11 +104,30 @@ const Education = () => {
     return [...data].sort((a, b) => parseDate(b.date) - parseDate(a.date));
   };
 
-  const filteredData = sortData(
-    educationData
-      .filter(item => activeCategories.includes(item.category))
-      .filter(item => activeSubcategories.length === 0 || activeSubcategories.includes(item.subcategory))
-  );
+  const applyFilters = () => {
+    let data = [...educationData];
+
+    if (searchTerm.trim()) {
+      const lower = searchTerm.toLowerCase();
+      data = data.filter(item =>
+        item.title.toLowerCase().includes(lower) ||
+        item.institution.toLowerCase().includes(lower) ||
+        item.description.toLowerCase().includes(lower) ||
+        item.category.toLowerCase().includes(lower) ||
+        item.subcategory.toLowerCase().includes(lower)
+      );
+    } else {
+      data = data
+        .filter(item => activeCategories.includes(item.category))
+        .filter(item =>
+          activeSubcategories.length === 0 || activeSubcategories.includes(item.subcategory)
+        );
+    }
+
+    return sortData(data);
+  };
+
+  const filteredData = applyFilters();
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
@@ -169,8 +189,7 @@ const Education = () => {
         </button>
       </div>
 
-      <PaginatedEducation data={filteredData} />
-      
+      <PaginatedEducation data={filteredData} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
     </div>
   );
 };
