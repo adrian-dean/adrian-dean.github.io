@@ -30,8 +30,10 @@ const Navbar = () => {
             <Link
               key={name}
               to={path}
-              className={`hover:text-teal-400 transition ${
-                location.pathname === path ? 'text-teal-400 font-semibold' : ''
+              className={`relative transition duration-200 ${
+                location.pathname === path
+                  ? 'text-teal-400 font-semibold after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-teal-400 after:content-[""] after:transition-all after:duration-300'
+                   : 'hover:text-teal-400'
               }`}
             >
               {name}
@@ -47,8 +49,10 @@ const Navbar = () => {
               key={name}
               to={path}
               onClick={() => setIsOpen(false)}
-              className={`block hover:text-teal-400 transition ${
-                location.pathname === path ? 'text-teal-400 font-semibold' : ''
+              className={`relative transition duration-200 ${
+                location.pathname === path
+                  ? 'text-teal-400 font-semibold after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-teal-400 after:content-[""] after:transition-all after:duration-300'
+                  : 'hover:text-teal-400'
               }`}
             >
               {name}
