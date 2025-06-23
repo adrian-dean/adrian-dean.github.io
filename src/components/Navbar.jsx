@@ -6,9 +6,9 @@ const Navbar = () => {
   const location = useLocation();
 
   const navItems = [
-    { name: 'Home', path: '/' },
+    { name: 'Home', path: '/' }, 
     { name: 'Education', path: '/education' },
-    { name: 'Projects', path: '/projects' }, // ✅ Added Projects link
+    { name: 'Projects', path: '/projects' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -20,7 +20,11 @@ const Navbar = () => {
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d={!isOpen ? 'M4 6h16M4 12h16M4 18h16' : 'M6 18L18 6M6 6l12 12'} />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d={!isOpen ? 'M4 6h16M4 12h16M4 18h16' : 'M6 18L18 6M6 6l12 12'}
+              />
             </svg>
           </button>
         </div>
@@ -33,7 +37,7 @@ const Navbar = () => {
               className={`relative transition duration-200 ${
                 location.pathname === path
                   ? 'text-teal-400 font-semibold after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-teal-400 after:content-[""] after:transition-all after:duration-300'
-                   : 'hover:text-teal-400'
+                  : 'hover:text-teal-400'
               }`}
             >
               {name}
@@ -49,7 +53,7 @@ const Navbar = () => {
               key={name}
               to={path}
               onClick={() => setIsOpen(false)}
-              className={`relative transition duration-200 ${
+              className={`relative block transition duration-200 ${
                 location.pathname === path
                   ? 'text-teal-400 font-semibold after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-teal-400 after:content-[""] after:transition-all after:duration-300'
                   : 'hover:text-teal-400'
