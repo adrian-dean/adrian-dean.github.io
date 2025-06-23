@@ -8,6 +8,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Education', path: '/education' },
+    { name: 'Projects', path: '/projects' }, // ✅ Added Projects link
     { name: 'Contact', path: '/contact' },
   ];
 

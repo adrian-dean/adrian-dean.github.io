@@ -1,70 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const projects = [
+const projectsData = [
   {
     id: 1,
-    title: 'Navy IT Career Guide',
-    description: 'A dedicated resource hub explaining Navy IT career paths, NECs, and certifications using TailwindCSS, React, and GitHub Pages.',
-    technologies: ['React', 'TailwindCSS', 'Vite', 'GitHub Pages'],
-    image: '/images/navy-it-career-guide.png',
-    link: 'https://adrian-dean.github.io/navy-it-career-guide',
-    github: 'https://github.com/adrian-dean/navy-it-career-guide'
+    title: 'Portfolio Website',
+    description: 'Personal website to showcase my Navy IT career and projects.',
+    tech: ['React', 'Tailwind', 'JavaScript'],
   },
   {
     id: 2,
-    title: 'Portfolio Website',
-    description: 'Personal portfolio built with React and Tailwind to showcase education, training, and projects.',
-    technologies: ['React', 'TailwindCSS', 'Vite'],
-    image: '/images/portfolio-site.png',
-    link: 'https://adrian-dean.github.io',
-    github: 'https://github.com/adrian-dean/portfolio-site'
-  }
+    title: 'Cyber Security Tracker',
+    description: 'Logs and monitors training certifications and cyber readiness.',
+    tech: ['React', 'Node.js', 'MongoDB'],
+  },
+  {
+    id: 3,
+    title: 'Deployment Scrapbook',
+    description: 'Creative digital scrapbook for loved ones before deployment.',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+  },
 ];
 
+const techOptions = ['All', 'React', 'Tailwind', 'JavaScript', 'Node.js', 'MongoDB', 'HTML', 'CSS'];
+
 const Projects = () => {
+  const [selectedTech, setSelectedTech] = useState('All');
+
+  const filteredProjects =
+    selectedTech === 'All'
+      ? projectsData
+      : projectsData.filter(project => project.tech.includes(selectedTech));
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">My Projects</h1>
-      <div className="grid md:grid-cols-2 gap-8">
-        {projects.map((project) => (
+    <div className="min-h-screen bg-gray-900 text-white p-6 md:p-12">
+      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">My Projects</h1>
+
+      {/* Tech Filter */}
+      <div className="flex flex-wrap gap-3 justify-center mb-8">
+        {techOptions.map(tech => (
+          <button
+            key={tech}
+            onClick={() => setSelectedTech(tech)}
+            className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out transform text-sm md:text-base ${
+              selectedTech === tech ? 'bg-teal-500 border-teal-400 scale-105' : 'bg-gray-800 border-gray-600 hover:bg-gray-700'
+            }`}
+          >
+            {tech}
+          </button>
+        ))}
+      </div>
+
+      {/* Project Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredProjects.map(project => (
           <div
             key={project.id}
-            className="bg-gray-800 p-6 rounded-2xl shadow-md hover:scale-[1.02] transition duration-300 ease-in-out hover:ring-2 hover:ring-teal-400"
+            className="bg-gray-800 p-4 rounded-xl shadow-md hover:scale-[1.02] transition-all duration-500 animate-fade-in border border-transparent hover:border-teal-400"
           >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-40 object-cover rounded-md mb-4"
-            />
-            <h2 className="text-xl font-semibold text-teal-400">{project.title}</h2>
-            <p className="text-gray-300 mt-2 mb-2">{project.description}</p>
-            <div className="flex flex-wrap gap-2 text-sm text-teal-300 mb-4">
-              {project.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="bg-gray-700 px-2 py-1 rounded"
-                >
-                  {tech}
-                </span>
+            <h2 className="text-xl font-semibold text-teal-400 mb-1">{project.title}</h2>
+            <p className="text-gray-300 mb-2">{project.description}</p>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map(t => (
+                <span key={t} className="bg-teal-700 text-xs px-2 py-1 rounded-md">{t}</span>
               ))}
-            </div>
-            <div className="flex gap-4">
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-teal-300 hover:underline"
-              >
-                Live Site
-              </a>
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-teal-300 hover:underline"
-              >
-                GitHub
-              </a>
             </div>
           </div>
         ))}
