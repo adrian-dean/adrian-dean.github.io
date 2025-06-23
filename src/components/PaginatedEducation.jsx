@@ -29,9 +29,12 @@ const PaginatedEducation = ({ data, searchTerm, setSearchTerm }) => {
       <div className="relative border-l border-gray-700 pl-6 space-y-10 transition-all duration-500">
         {paginatedItems.length > 0 ? (
           paginatedItems.map(item => (
-            <div key={item.id} className="relative group">
-              <div className="absolute w-3 h-3 bg-teal-500 rounded-full left-[-7px] top-1.5 z-20 transition-transform duration-300 ease-in-out group-hover:scale-105 group-hover:translate-x-0.5 group-hover:translate-y-0.5"></div>
-              <div className="bg-gray-800 p-4 rounded-md shadow-md transform transition duration-300 ease-in-out group-hover:scale-[1.02] group-hover:animate-glow-pulse z-10">
+            <div
+              key={item.id}
+              className="relative group transform transition duration-300 ease-in-out hover:scale-[1.02] hover:animate-glow-pulse rounded-md"
+            >
+              <div className="absolute w-3 h-3 bg-teal-500 rounded-full left-[-7px] top-1.5 z-10"></div>
+              <div className="bg-gray-800 p-4 shadow-md rounded-md">
                 <h2 className="text-xl font-semibold text-teal-400">{item.title}</h2>
                 <h3 className="text-sm text-gray-400">{item.institution} • {item.date}</h3>
                 <p className="mt-2 text-gray-300">{item.description}</p>
