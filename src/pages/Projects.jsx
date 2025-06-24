@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PageWrapper from '../components/PageWrapper';
 
 const projectsData = [
   {
@@ -32,44 +33,49 @@ const Projects = () => {
       : projectsData.filter(project => project.tech.includes(selectedTech));
 
   return (
-    <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white p-6 md:p-12 transition-colors duration-300">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">My Projects</h1>
+    <PageWrapper>
+      <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white p-6 md:p-12 transition-colors duration-300">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">Projects</h1>
+        <p className="text-lg mb-6 text-center">
+          Browse my featured and recent projects below. Filter by technology stack to find what interests you most.
+        </p>
 
-      {/* Tech Filter */}
-      <div className="flex flex-wrap gap-3 justify-center mb-8">
-        {techOptions.map(tech => (
-          <button
-            key={tech}
-            onClick={() => setSelectedTech(tech)}
-            className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out transform text-sm md:text-base ${
-              selectedTech === tech
-                ? 'bg-teal-500 border-teal-400 text-white'
-                : 'bg-gray-100 text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-            }`}
-          >
-            {tech}
-          </button>
-        ))}
-      </div>
+        {/* Tech Filter */}
+        <div className="flex flex-wrap gap-3 justify-center mb-8">
+          {techOptions.map(tech => (
+            <button
+              key={tech}
+              onClick={() => setSelectedTech(tech)}
+              className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out transform text-sm md:text-base ${
+                selectedTech === tech
+                  ? 'bg-teal-500 border-teal-400 text-white'
+                  : 'bg-gray-100 text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
+            >
+              {tech}
+            </button>
+          ))}
+        </div>
 
-      {/* Project Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProjects.map(project => (
-          <div
-            key={project.id}
-            className="bg-gray-100 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:scale-[1.02] transition-all duration-500 animate-fade-in border border-transparent hover:border-teal-400"
-          >
-            <h2 className="text-xl font-semibold text-teal-600 dark:text-teal-400 mb-1">{project.title}</h2>
-            <p className="text-gray-700 dark:text-gray-300 mb-2">{project.description}</p>
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map(t => (
-                <span key={t} className="bg-teal-700 text-white text-xs px-2 py-1 rounded-md">{t}</span>
-              ))}
+        {/* Project Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProjects.map(project => (
+            <div
+              key={project.id}
+              className="bg-gray-100 dark:bg-gray-800 p-4 rounded-xl shadow-md hover:scale-[1.02] transition-all duration-500 animate-fade-in border border-transparent hover:border-teal-400"
+            >
+              <h2 className="text-xl font-semibold text-teal-600 dark:text-teal-400 mb-1">{project.title}</h2>
+              <p className="text-gray-700 dark:text-gray-300 mb-2">{project.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.tech.map(t => (
+                  <span key={t} className="bg-teal-700 text-white text-xs px-2 py-1 rounded-md">{t}</span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 
