@@ -5,13 +5,13 @@ import { MapPin } from 'lucide-react';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-4 py-10 md:px-10 md:py-20">
+    <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white p-6 transition-colors duration-300">
       {/* Hero Section */}
       <section className="text-center space-y-4 mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-teal-400">Adrian Dean</h1>
-        <p className="text-xl md:text-2xl">Information Systems Technician</p>
-        <p className="text-gray-300 flex justify-center items-center gap-2">
-          <MapPin className="w-5 h-5 text-teal-400" />
+        <h1 className="text-4xl md:text-5xl font-bold text-teal-500 dark:text-teal-400">Adrian Dean</h1>
+        <p className="text-xl md:text-2xl text-gray-800 dark:text-gray-200">Information Systems Technician</p>
+        <p className="text-gray-600 dark:text-gray-300 flex justify-center items-center gap-2">
+          <MapPin className="w-5 h-5 text-teal-500 dark:text-teal-400" />
           NC, USA <span role="img" aria-label="USA Flag">🇺🇸</span>
         </p>
 
@@ -33,13 +33,13 @@ const Home = () => {
       <section className="mb-16">
         <h2 className="text-2xl font-semibold text-center mb-6">Work Experience</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <div className="bg-gray-800 p-4 rounded-xl shadow-md border border-teal-500">
-            <h3 className="text-lg font-semibold text-teal-400">System Administrator</h3>
-            <p className="text-gray-300">United States Navy • 07/2025 – Present</p>
+          <div className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white rounded-md p-4 shadow-md transition duration-300">
+            <h3 className="text-xl font-bold text-teal-600 dark:text-teal-400">System Administrator</h3>
+            <p className="text-gray-700 dark:text-gray-300">United States Navy • 07/2025 – Present</p>
           </div>
-          <div className="bg-gray-800 p-4 rounded-xl shadow-md border border-teal-500">
-            <h3 className="text-lg font-semibold text-teal-400">Information Systems Technician</h3>
-            <p className="text-gray-300">United States Navy • 03/2025 – Present</p>
+          <div className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white rounded-md p-4 shadow-md transition duration-300">
+            <h3 className="text-xl font-bold text-teal-600 dark:text-teal-400">Information Systems Technician</h3>
+            <p className="text-gray-700 dark:text-gray-300">United States Navy • 03/2025 – Present</p>
           </div>
         </div>
       </section>
@@ -49,9 +49,9 @@ const Home = () => {
         <h2 className="text-2xl font-semibold text-center mb-6">Recent Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[1, 2, 3].map(i => (
-            <div key={i} className="bg-gray-800 p-4 rounded-xl shadow-md border border-gray-700 hover:border-teal-400 transition">
-              <h3 className="text-lg font-semibold text-teal-400">Project Title {i}</h3>
-              <p className="text-gray-300">Brief description of project {i} goes here.</p>
+            <div key={i} className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white rounded-md p-4 shadow-md transition duration-300">
+              <h3 className="text-xl font-bold text-teal-600 dark:text-teal-400">Project Title {i}</h3>
+              <p className="text-gray-700 dark:text-gray-300">Brief description of project {i} goes here.</p>
             </div>
           ))}
         </div>

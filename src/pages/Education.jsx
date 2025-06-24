@@ -59,8 +59,6 @@ const educationData = [
   return parseDate(b.date) - parseDate(a.date);
 });
 
-
-
 const categoryOptions = [
   { id: 'education', label: 'Education' },
   { id: 'military', label: 'Military Training' },
@@ -130,9 +128,10 @@ const Education = () => {
   const filteredData = applyFilters();
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
+    <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white p-8 transition-colors duration-300">
       <h1 className="text-3xl font-bold mb-6 text-center">Education & Training</h1>
 
+      {/* Category Filters */}
       <div className="flex flex-wrap gap-4 mb-6 justify-center">
         {categoryOptions.map(({ id, label }) => (
           <div
@@ -144,7 +143,9 @@ const Education = () => {
             <button
               onClick={() => toggleCategory(id)}
               className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out transform ${
-                activeCategories.includes(id) ? 'bg-teal-500 border-teal-400 scale-105' : 'bg-gray-800 border-gray-600 hover:bg-gray-700'
+                activeCategories.includes(id)
+                  ? 'bg-teal-500 border-teal-400 text-white'
+                  : 'bg-gray-100 text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >
               {label} ▼
@@ -152,14 +153,16 @@ const Education = () => {
             <div
               className={`absolute mt-2 w-48 rounded-md shadow-lg z-10 transition-all duration-200 origin-top-left ${
                 hoveredDropdown === id ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
-              } bg-gray-800 border border-gray-600`}
+              } bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600`}
             >
               {subcategoryOptions[id]?.map(sub => (
                 <button
                   key={sub}
                   onClick={() => toggleSubcategory(sub)}
-                  className={`block w-full text-left px-4 py-2 transition hover:bg-gray-700 ${
-                    activeSubcategories.includes(sub) ? 'text-teal-400' : 'text-white'
+                  className={`block w-full text-left px-4 py-2 transition ${
+                    activeSubcategories.includes(sub)
+                      ? 'text-teal-500 font-medium'
+                      : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
                 >
                   {sub}
@@ -170,11 +173,14 @@ const Education = () => {
         ))}
       </div>
 
+      {/* Sort Buttons */}
       <div className="flex justify-center gap-4 mb-8">
         <button
           onClick={() => setSortMode('timeline')}
           className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out ${
-            sortMode === 'timeline' ? 'bg-teal-500 border-teal-400 scale-105' : 'bg-gray-800 border-gray-600 hover:bg-gray-700'
+            sortMode === 'timeline'
+              ? 'bg-teal-500 border-teal-400 text-white'
+              : 'bg-gray-100 text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
           Timeline
@@ -182,7 +188,9 @@ const Education = () => {
         <button
           onClick={() => setSortMode('alphabetical')}
           className={`px-4 py-2 rounded-full border transition duration-300 ease-in-out ${
-            sortMode === 'alphabetical' ? 'bg-teal-500 border-teal-400 scale-105' : 'bg-gray-800 border-gray-600 hover:bg-gray-700'
+            sortMode === 'alphabetical'
+              ? 'bg-teal-500 border-teal-400 text-white'
+              : 'bg-gray-100 text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 border-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
           Alphabetical Order
